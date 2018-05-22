@@ -1,0 +1,33 @@
+{
+  "debug": true,
+  "hostname": "zhangt-custom-data",
+  "smartapi": "https://devsmarteye.anchnet.com/api/hardware/info",
+  "plugin": {
+    "enabled": false,
+    "dir": "./plugin",
+    "git": "https://github.com/open-falcon/plugin.git",
+    "logs": "./logs"
+  },
+  "heartbeat": {
+    "enabled": true,
+    "addr": "127.0.0.1:6030",
+    "interval": 60,
+    "timeout": 1000
+  },
+  "transfer": {
+    "enabled": true,
+    "addrs": [
+      "127.0.0.1:8433",
+      "127.0.0.1:8433"
+    ],
+    "interval": 60,
+    "timeout": 1000
+  },
+  "http": {
+    "enabled": false,
+    "listen": ":1988",
+    "backdoor": false
+  },
+  "exectimeout": 0,
+  "cycle": 0
+}
