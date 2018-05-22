@@ -8,10 +8,10 @@ import (
 
 	//log "github.com/cihub/seelog"
 
-	"github.com/anchnet/hardware-agent/cron"
-	"github.com/anchnet/hardware-agent/funcs"
-	"github.com/anchnet/hardware-agent/g"
-	"github.com/anchnet/hardware-agent/http"
+	"github.com/anchnet/hardware-dell-agent/cron"
+	"github.com/anchnet/hardware-dell-agent/funcs"
+	"github.com/anchnet/hardware-dell-agent/g"
+	"github.com/anchnet/hardware-dell-agent/http"
 )
 
 func main() {

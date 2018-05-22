@@ -1,4 +1,4 @@
-# hardware-agent
+# hardware-dell-agent
 hardware agent 
 
 基于ipmitool，硬件监控专用agent。

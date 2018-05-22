@@ -11,7 +11,7 @@ import (
 	//"strconv"
 	"bytes"
 	"strconv"
-	"github.com/anchnet/hardware-agent/g"
+	"github.com/anchnet/hardware-dell-agent/g"
 )
 
 func HardwareMetrics() (L []*model.MetricValue) {
@@ -91,13 +91,13 @@ func path_file_exec(fpath string, L []*model.MetricValue) ([]*model.MetricValue)
 			sensor_type = strings.Replace(sensor_type, "_/_", "_", -1)
 			//log.Info("[INFO] Sensor_Type : ", sensor_type)
 
-			//deal with s[4] , get Status
+			//deal with s[8] , get Status
 			status_flag := 0
 			var status_value int64;
-			status_arr := strings.Trim(s[4], " ")
+			status_arr := strings.Trim(s[8], " ")
 			if len(status_arr) > 1 {
 				status_flag = 1
-				if strings.Contains(s[4], "ok") {
+				if strings.Contains(s[8], "ok") {
 					status_value = 0
 				} else {
 					status_value = -1
@@ -109,6 +109,27 @@ func path_file_exec(fpath string, L []*model.MetricValue) ([]*model.MetricValue)
 				L = append(L, GaugeValue(sensor_type, val, tags))
 				if (status_flag > 0) {
 					L = append(L, GaugeValue(sensor_type + ".status", status_value, tags))
+				}
+				//deal with s[4]~s[7] , get critical line
+				if len(strings.Trim(s[4], " ")) > 0 {
+					if val, err := strconv.ParseFloat(strings.Trim(s[4], " "), 64); err == nil {
+						L = append(L, GaugeValue(sensor_type + ".lower_crit", val, tags))
+					}
+				}
+				if len(strings.Trim(s[5], " ")) > 0 {
+					if val, err := strconv.ParseFloat(strings.Trim(s[5], " "), 64); err == nil {
+						L = append(L, GaugeValue(sensor_type + ".lower_non_crit", val, tags))
+					}
+				}
+				if len(strings.Trim(s[6], " ")) > 0 {
+					if val, err := strconv.ParseFloat(strings.Trim(s[6], " "), 64); err == nil {
+						L = append(L, GaugeValue(sensor_type + ".upper_crit", val, tags))
+					}
+				}
+				if len(strings.Trim(s[7], " ")) > 0 {
+					if val, err := strconv.ParseFloat(strings.Trim(s[7], " "), 64); err == nil {
+						L = append(L, GaugeValue(sensor_type + ".upper_non_crit", val, tags))
+					}
 				}
 			} else {
 				log.Info("[ERROR] value parse float error , the value is ", value, " . Metric Counter is :", sensor_type, "/", tags)

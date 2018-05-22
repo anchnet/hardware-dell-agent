@@ -3,9 +3,9 @@ package cron
 import (
 	"time"
 
-	"github.com/anchnet/hardware-agent/g"
+	"github.com/anchnet/hardware-dell-agent/g"
 	"github.com/open-falcon/common/model"
-	"github.com/anchnet/hardware-agent/funcs"
+	"github.com/anchnet/hardware-dell-agent/funcs"
 )
 
 func Collect() {

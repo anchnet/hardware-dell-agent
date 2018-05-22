@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/anchnet/hardware-agent/g"
+	"github.com/anchnet/hardware-dell-agent/g"
 	"io"
 )
 
