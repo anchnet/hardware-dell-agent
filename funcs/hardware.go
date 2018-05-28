@@ -60,13 +60,16 @@ func path_file_exec(fpath string, L []*model.MetricValue) ([]*model.MetricValue)
 		//fmt.Println(s)
 		if (len(s) > 1) {
 			//deal with s[3] , get Value
-			if strings.Contains(s[3], "No Reading") || strings.Contains(s[3], "Disabled") {
+			if strings.Contains(s[3], "No Reading") {
 				//如果值为No Reading或Disabled，则丢弃数据
 				log.Info("[INFO] Drop Data : ", s[3])
 				continue
 			}
 			value_arr := strings.Split(strings.Trim(s[3], " "), " ")
 			value := strings.Replace(value_arr[0], "h", "", -1)
+			if (strings.Contains(s[3], "Disabled")) {
+				value = "-99999"
+			}
 			//log.Info("[INFO] Value : ", value)
 
 			// deal with s[0] , get Entity Number
